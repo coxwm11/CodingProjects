@@ -1,8 +1,10 @@
 package book;
 
 import java.util.InputMismatchException;
+import java.util.ListIterator;
 import java.util.Scanner;
 import java.util.LinkedList;
+import java.util.Formatter;
 
 public class BookTest {
 
@@ -103,20 +105,37 @@ public class BookTest {
 				} while (copies == -1);
 
 			}
+			
+			//Breaks Line after while Loop
 			System.out.println("");
 
+			
+			
 			Book b = new Book(serialNumber, pageNumber, copies, bookTitle, authorName, bookCost);
 
 			myList.add(b);
 
-			System.out.println(b.toString());
 
 		} while (serialNumber != 000);
+		
+		ListIterator<Book> iterator =myList.listIterator();
+		
+		System.out.format("%-10s%-10s%-10s%-10s%-10s%-10s%n", "ISBN", "Title", "Author", "Pages", "Price", "In Stock");  
+        System.out.println("------------------------------------------------------------");
 
-		for (Book b : myList) {
+	
+      
+        
+        
+        for (Book b : myList) {
+			
 			System.out.println(b);
+			
+			
 		}
-		// Book takes input from user for isbn, title, author, price, copies available
+		
+		
+		
 
 	}
 
