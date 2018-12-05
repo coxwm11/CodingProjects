@@ -3,7 +3,10 @@
 //Author: Wendy Prayer
 //Date:12/4/2018
 
+
 package book;
+
+import java.util.Formatter;
 
 public class Book implements Comparable<Book> {
 
@@ -62,10 +65,10 @@ public class Book implements Comparable<Book> {
 	//This prints out the list Come back and format this later
 	public String toString(){
 		
-		return author;
 		
-	}
-
+		return String.format("%-10d%-10s%-10s%-10d%-10.2f%-10d%n", serialNumber , title ,author, pages, price ,inStock);
+		
+	} 
 	public int compareTo(Book b) {
 		if (serialNumber > b.serialNumber) {
 			return 1;
