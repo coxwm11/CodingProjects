@@ -6,15 +6,15 @@
 
 package book;
 
-import java.util.Formatter;
+
 
 public class Book implements Comparable<Book> {
 
-	int pages, inStock, serialNumber;
-	String title, author;
+	int pages, inStock;
+	String title, author, serialNumber;
 	double price;
 
-	public Book(int isbn, int numberOfPages, int stockNumber, String name, String writer, double cost) {
+	public Book(String isbn, int numberOfPages, int stockNumber, String name, String writer, double cost) {
 
 		serialNumber = isbn;
 		pages = numberOfPages;
@@ -25,7 +25,7 @@ public class Book implements Comparable<Book> {
 
 	}
 
-	public int getSerialNumber() {
+	public String getSerialNumber() {
 
 		return serialNumber;
 
@@ -66,15 +66,18 @@ public class Book implements Comparable<Book> {
 	public String toString(){
 		
 		
-		return String.format("%-10d%-10s%-10s%-10d%-10.2f%-10d%n", serialNumber , title ,author, pages, price ,inStock);
+		return String.format("%-10s%-10s%-10s%-10d%-10.2f%-10d%n", serialNumber , title ,author, pages, price ,inStock);
 		
 	} 
+	
+	
+	//Sorts books by price
 	public int compareTo(Book b) {
-		if (serialNumber > b.serialNumber) {
+		if (price > b.price) {
 			return 1;
 		}
 
-		else if (serialNumber < b.serialNumber) {
+		else if (price < b.price) {
 			return -1;
 		} else {
 			return 0;
