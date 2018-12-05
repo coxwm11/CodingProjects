@@ -1,13 +1,13 @@
 package book;
 
 import java.util.InputMismatchException;
-import java.util.ListIterator;
 import java.util.Scanner;
 import java.util.LinkedList;
-import java.util.Formatter;
+
 
 public class BookTest {
 
+	//Method catches non-Integers
 	public static int integersOnly() {
 		Scanner scan = new Scanner(System.in);
 
@@ -28,6 +28,7 @@ public class BookTest {
 
 	}
 
+	//Method catches nondoubles
 	public static double doublesOnly() {
 		Scanner scan = new Scanner(System.in);
 
@@ -57,27 +58,31 @@ public class BookTest {
 		System.out.println("----------------------------------------");
 
 		Scanner scan = new Scanner(System.in);
-		int serialNumber;
+		//int serialNumber;
+		String serialNumber;
 		int pageNumber = 0;
 		int copies = 0;
 		double bookCost = 0;
 		String bookTitle = null;
 		String authorName = null;
+		boolean cancel ;
 
 		do {
+			
 
 			// User enters ISBN
 			System.out.print("Enter an ISBN or 000 to stop: ");
-			serialNumber = scan.nextInt();
+			serialNumber = scan.nextLine();
+			
+			cancel = serialNumber.equals("000");
 
-			if (serialNumber != 000)
+			if (cancel != true)
 
 			{
 				// User enters title
 				System.out.print("Enter book title: ");
 
-				// flush the Buffer
-				String flush = scan.nextLine();
+				
 				bookTitle = scan.nextLine();
 
 				// User enters author
@@ -116,23 +121,25 @@ public class BookTest {
 			myList.add(b);
 
 
-		} while (serialNumber != 000);
+		} while (cancel != true);
 		
-		ListIterator<Book> iterator =myList.listIterator();
+		
 		
 		System.out.format("%-10s%-10s%-10s%-10s%-10s%-10s%n", "ISBN", "Title", "Author", "Pages", "Price", "In Stock");  
         System.out.println("------------------------------------------------------------");
 
 	
-      
-        
+         
         
         for (Book b : myList) {
 			
+        	myList.removeLast();
 			System.out.println(b);
 			
 			
 		}
+        
+        
 		
 		
 		
