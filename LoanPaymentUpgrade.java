@@ -1,282 +1,166 @@
-// Program:	LoanPayment.java
-// Purpose: This program reads a value and calculates Loan Details.
-// Author:	Wendy Prayer	
-// Date:	10/23/2018
+package book;
 
-
+import java.util.InputMismatchException;
+import java.util.Iterator;
 import java.util.Scanner;
+import java.util.LinkedList;
 
-import java.text.DecimalFormat;
+public class BookTest {
 
-public class LoanPaymentUpgrade {
+	// Method catches non-Integers
+	public static int integersOnly() {
+		Scanner scan = new Scanner(System.in);
+
+		try {
+
+			// User enters page Number
+
+			return scan.nextInt();
+
+		}
+
+		catch (InputMismatchException e) {
+			System.out.println("ATTN: Please enter only positive integers.");
+			System.out.println("");
+
+			return -1;
+		}
+
+	}
+
+	// Method catches nondoubles
+	public static double doublesOnly() {
+		Scanner scan = new Scanner(System.in);
+
+		try {
+
+			// User enters page Number
+
+			return scan.nextDouble();
+
+		}
+
+		catch (InputMismatchException e) {
+			System.out.println("ATTN: Please enter only positive numbers.");
+			System.out.println("");
+
+			return -1;
+		}
+
+	}
 
 	public static void main(String[] args) {
-		
-		// variables to restart program
-		char response = 'Y' ;	//variable to get the while loop restarted
 
-		
-		
-		while( response == 'Y' || response == 'y' )
-		{
-		
-		
-		
-		//variables for calculation
-		DecimalFormat df1 = new DecimalFormat("0.##");
-		double loanAmount;
-		final double LOAN_MAX = 1000000;
-		final double LOAN_MIN = 0;
-		double interestRate;
-		final double  INT_MAX = 15;
-		final double INT_MIN = 2;
-		final double TERM_MIN = 0;
-		final double TERM_MAX = 30;
-		int loanTerm;
-		
+		LinkedList<Book> myList = new LinkedList<Book>();
 
-		
-		System.out.println("\tLoan Payment Calculator");
-		System.out.println("*******************************************");
-		
-	
-		
+		// Introduction
+		System.out.println("\tPrayer Book Store");
+		System.out.println("----------------------------------------");
+
 		Scanner scan = new Scanner(System.in);
-		
-		System.out.println("Enter the initial loan amount:");
-		loanAmount = scan.nextDouble();
-		
 	
-		//Loan Amount Validation
-		while(loanAmount > LOAN_MAX || loanAmount <= LOAN_MIN) 
-		{
-			if (loanAmount > LOAN_MAX)
-				do
-				{
-				
-					System.out.println("The loan amount cannot exceed $1,000,000.00. Try again." );
-				
-					loanAmount = scan.nextDouble();			
-				
-				
-						}while (loanAmount > LOAN_MAX);
+		String serialNumber;
+		int pageNumber = 0;
+		int copies = 0;
+		double bookCost = 0;
+		String bookTitle = null;
+		String authorName = null;
+		boolean yesAnswer;
+		boolean noAnswer;
+		char response = 'Y';
+		
+		
+		do {
 			
-		
-		
-			if (loanAmount <= LOAN_MIN)
-				do
-		
-					{
 			
-						System.out.println("You must enter a value greater than zero. Try again.");
-						
-						loanAmount = scan.nextDouble();
-						
-					}while (loanAmount<= LOAN_MIN);
+			// User enters ISBN
+			System.out.print("Enter an ISBN :");
+			serialNumber = scan.nextLine();
 			
-				}
-		
-		
-		
-		
-		
-		
-		//Interest Rate Validation
-		System.out.println("Enter the annual interest rate (as a percentage):");
-		interestRate = scan.nextDouble();
-		
-		while(interestRate > INT_MAX || interestRate < INT_MIN) 
-		{
-			if (interestRate > INT_MAX)
-				
-			do
-			{
-				
-				System.out.println("You must enter a value between 2.0 and 15.0 (inclusive). Try again."  );
-				
-				interestRate = scan.nextDouble();			
-				
-				
-			}while (interestRate > INT_MAX);
+			boolean stopPgm = serialNumber.equals("000");
 			
-		
-		
-			if (interestRate < INT_MIN)
-			do
-		
-		{
-			
-				System.out.println("You must enter a value between 2.0 and 15.0 (inclusive). Try again.");
-			interestRate = scan.nextDouble();
-		}while (interestRate < INT_MIN);
-			
-		}
-		
-		
-		
-		
-		
+			if (stopPgm != true)
 
-		//Loan Term Validation
-		System.out.println("Enter the term of the loan in years:");
-		loanTerm = scan.nextInt();
-		
-		while(loanTerm > TERM_MAX || loanTerm < TERM_MIN) 		
-		{
-			if (loanTerm > TERM_MAX)
 			{
-				do
-				{
-				
-					System.out.println("You must enter a value no greater than 30 years. Try again."  );
-				
-					loanTerm = scan.nextInt();			
-				
-				
-			}while (loanTerm > TERM_MAX);
-			
-		
-				
-		}	
-		
-			if (loanTerm <= TERM_MIN)
-			{
-			
-				do
-		
-				{
-			
-				System.out.println("You must enter a value greater than 0. Try again.");
-				loanTerm = scan.nextInt();
-				
-				
-				}	while (loanTerm <= TERM_MIN);
-			
-			
-		
-			}
-		}
-		
+				// User enters title
+				System.out.print("Enter book title: ");
 
-			
-			//Variables for Calculations
-			double monthlyPayment;
-			double monthlyPayment1;
-			double monthlyPayment2;
-			double monthlyPayment3;
-			double monthlyInterestRate;
-			double totalMonthlyPayments;
-			double paymentAmount;
-			double monthlyInterestPer;
-			
-		
+				bookTitle = scan.nextLine();
 
-			//Calculations for monthly payment
-			monthlyInterestPer = interestRate/ 100;//changes to a decimal
-			monthlyInterestRate = monthlyInterestPer/ 12;// rate divided by 12
-			monthlyPayment = (loanAmount * monthlyInterestRate);//amount * rate
-			monthlyPayment1= (1)/(1 + monthlyInterestRate);// rate divided by one and added one
-			totalMonthlyPayments = loanTerm * 12;//term converted to months
-			monthlyPayment2 = Math.pow(monthlyPayment1, totalMonthlyPayments);// result raised to the power of months
-			monthlyPayment3 = 1 - (monthlyPayment2);// 1 subtracted from calculations
-			paymentAmount = 1+1;
-			
-			paymentAmount = monthlyPayment / monthlyPayment3;//final result
-		
-			System.out.println("Your monthly payment is: $" + df1.format(paymentAmount));
-			
-			
-			//Heading for table
-			
-			System.out.println("");
-			
-			System.out.print("Month");
-			
-			System.out.print("\t Interest");
-			
-			System.out.println("\t Principal");
-			
-			System.out.println("------------------------------------");
-			
-			
-			//variables for Interest Rate Payment Per Month
-			double monthlyInterestPayment;
-			double principalAmount;
-			double remainingBal;
-			
-			
-			
-			//Calculations for monthly Interest Payment
-			monthlyInterestPayment = monthlyInterestRate * loanAmount;//10,500 * 0.001875 Step1
-			
-			
-			//Calculations for the principal
-			principalAmount = paymentAmount - monthlyInterestPayment;//447.83-19.69 Step2&3
-			
-			remainingBal = loanAmount - principalAmount;//10,500 - 428.14 Step4
-			
-			
-			
-			
+				// User enters author
+				System.out.print("Enter author: ");
+				authorName = scan.nextLine();
+
+				// User enters page Number
+				do {
+					System.out.print("Enter number of pages in the book: ");
+					pageNumber = integersOnly();
+
+				} while (pageNumber == -1);
+
+				do {
+					// User enters price of Book
+					System.out.print("Enter the price of the book: ");
+					bookCost = doublesOnly();
+				} while (bookCost == -1);
+
+				do {
+					// User enters Number of copies in stock
+					System.out.print("Number of Copies in Stock: ");
+					copies = integersOnly();
 					
-			
-			for (int i = 1; i<= loanTerm*12; i = i+1)
-			{
-				
-				
-				System.out.format("%-4s%10.2f%18.2f%n", i, monthlyInterestPayment, principalAmount);
-				
-				//updates interest Payment
-				monthlyInterestPayment = remainingBal * monthlyInterestRate;
-				
-				
-				//updates principal Amount
-				principalAmount = paymentAmount - monthlyInterestPayment;
-				
-				//updates remaining balance
-				remainingBal = remainingBal - principalAmount;
-				
-			
-			
-			}//end of for loop bracket   
-			
-			
-			//Interest Total Variable
-			double totalInterest =  (paymentAmount * totalMonthlyPayments) - loanAmount;
-		
-			System.out.println("");
-			System.out.println("The total amount of interest paid is: " + df1.format(totalInterest));
-		
-			
-			System.out.println("");
-			boolean yesAnswer ;
-			boolean noAnswer ;
-			scan.nextLine(); //flush the input 
-			
-			
-			// Getting user Response
 
-			do 	
-			{
-			  System.out.print("Do you want to calculate the interest to another loan (y/n)? ") ;
-			  response = scan.nextLine().charAt(0); //get the first character
-
-			  
-			  yesAnswer = ( response == 'Y' ) || ( response == 'y' ) ;
-			  noAnswer = ( response == 'N' ) || ( response == 'n' ) ;
-
-			} while( !( yesAnswer || noAnswer )) ;
+				} while (copies == -1);
+					 
 				
+				
+				
+				System.out.println("");
+				System.out.print("Would you like to continue? Yes or No (y/n) to Continue.");
+				response = scan.nextLine().charAt(0);
+
+			} 
+			
+			
+			
+			yesAnswer = (response == 'Y') || (response == 'y');
+			noAnswer = (response == 'N') || (response == 'n');
+
+
+			// Breaks Line after while Loop
 			System.out.println("");
 
-	
+			Book b = new Book(serialNumber, pageNumber, copies, bookTitle, authorName, bookCost);
+
+			myList.add(b);
+
+		} while (yesAnswer || !(noAnswer));
+
+		System.out.println(
+				"----------------------------------------------------------------------------------------------------");
+		System.out.format("%-18s%-18s%-18s%-18s%-18s%-18s%n", "ISBN", "Title", "Author", "Pages", "Price", "In Stock");
+		System.out.println(
+				"----------------------------------------------------------------------------------------------------");
+
+		for (Book b : myList) {
+
+		System.out.println(b);
+
 		}
-	
-		System.out.println("Thank you for using the Loan Interest Calculator. Goodbye!");
-	
-	}
-
 
 		
+		
+
+		System.out.println("Copies Sold This Week:");
+		System.out.println("-------------------------------------");
+
+		/*
+		 * for (Book b : myList); {
+		 * System.out.print("Enter the number of copies sold for " + bookTitle + ":");
+		 * int copyCount = scan.nextInt(); }
+		 * 
+		 */
+
 	}
 
+}
