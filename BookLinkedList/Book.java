@@ -66,7 +66,7 @@ public class Book implements Comparable<Book> {
 	public String toString(){
 		
 		
-		return String.format("%-10s%-10s%-10s%-10d%-10.2f%-10d%n", serialNumber , title ,author, pages, price ,inStock);
+		return String.format("%-18s%-18s%-18s%-18d%-18.2f%-18d%n", serialNumber , title ,author, pages, price ,inStock);
 		
 	} 
 	
