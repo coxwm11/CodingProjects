@@ -1,13 +1,13 @@
 package book;
 
 import java.util.InputMismatchException;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.LinkedList;
 
-
 public class BookTest {
 
-	//Method catches non-Integers
+	// Method catches non-Integers
 	public static int integersOnly() {
 		Scanner scan = new Scanner(System.in);
 
@@ -28,7 +28,7 @@ public class BookTest {
 
 	}
 
-	//Method catches nondoubles
+	// Method catches nondoubles
 	public static double doublesOnly() {
 		Scanner scan = new Scanner(System.in);
 
@@ -58,31 +58,31 @@ public class BookTest {
 		System.out.println("----------------------------------------");
 
 		Scanner scan = new Scanner(System.in);
-		//int serialNumber;
+	
 		String serialNumber;
 		int pageNumber = 0;
 		int copies = 0;
 		double bookCost = 0;
 		String bookTitle = null;
 		String authorName = null;
-		boolean cancel ;
+		String cancelProgram = null;
+		//boolean cancel = null;
+		
 
 		do {
-			
 
 			// User enters ISBN
-			System.out.print("Enter an ISBN or 000 to stop: ");
+			System.out.print("Enter an ISBN :");
 			serialNumber = scan.nextLine();
 			
-			cancel = serialNumber.equals("000");
+			boolean stopPgm = serialNumber.equals("000");
 
-			if (cancel != true)
+			if (stopPgm != true)
 
 			{
 				// User enters title
 				System.out.print("Enter book title: ");
 
-				
 				bookTitle = scan.nextLine();
 
 				// User enters author
@@ -106,43 +106,52 @@ public class BookTest {
 					// User enters Number of copies in stock
 					System.out.print("Number of Copies in Stock: ");
 					copies = integersOnly();
+					
 
 				} while (copies == -1);
+				
+				
+				System.out.print("Would you like to continue? 000 to Quit. Yes (y) to Continue.");
+				
+				 cancelProgram = scan.nextLine();
+				 
+				
 
-			}
-			
-			//Breaks Line after while Loop
+			} 
+
+			// Breaks Line after while Loop
 			System.out.println("");
 
-			
-			
 			Book b = new Book(serialNumber, pageNumber, copies, bookTitle, authorName, bookCost);
 
 			myList.add(b);
 
+		} while (cancelProgram.equals("000") != true);
 
-		} while (cancel != true);
-		
-		
-		
-		System.out.format("%-10s%-10s%-10s%-10s%-10s%-10s%n", "ISBN", "Title", "Author", "Pages", "Price", "In Stock");  
-        System.out.println("------------------------------------------------------------");
+		System.out.println(
+				"----------------------------------------------------------------------------------------------------");
+		System.out.format("%-18s%-18s%-18s%-18s%-18s%-18s%n", "ISBN", "Title", "Author", "Pages", "Price", "In Stock");
+		System.out.println(
+				"----------------------------------------------------------------------------------------------------");
 
-	
-         
-        
-        for (Book b : myList) {
-			
-        	myList.removeLast();
-			System.out.println(b);
-			
-			
+		for (Book b : myList) {
+
+		System.out.println(b);
+
 		}
-        
-        
+
 		
 		
-		
+
+		System.out.println("Copies Sold This Week:");
+		System.out.println("-------------------------------------");
+
+		/*
+		 * for (Book b : myList); {
+		 * System.out.print("Enter the number of copies sold for " + bookTitle + ":");
+		 * int copyCount = scan.nextInt(); }
+		 * 
+		 */
 
 	}
 
