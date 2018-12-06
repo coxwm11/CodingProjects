@@ -1,5 +1,6 @@
 package book;
 
+import java.lang.reflect.Array;
 import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -59,7 +60,7 @@ public class BookTest {
 		System.out.println("----------------------------------------");
 
 		Scanner scan = new Scanner(System.in);
-	
+
 		String serialNumber;
 		int pageNumber = 0;
 		int copies = 0;
@@ -69,17 +70,15 @@ public class BookTest {
 		boolean yesAnswer;
 		boolean noAnswer;
 		char response = 'Y';
-		
-		
+
 		do {
-			
-			
+
 			// User enters ISBN
 			System.out.print("Enter an ISBN: ");
 			serialNumber = scan.nextLine();
-			
+
 			boolean stopPgm = serialNumber.equals("000");
-			
+
 			if (stopPgm != true)
 
 			{
@@ -109,24 +108,17 @@ public class BookTest {
 					// User enters Number of copies in stock
 					System.out.print("Number of Copies in Stock: ");
 					copies = integersOnly();
-					
 
 				} while (copies == -1);
-					 
-				
-				
-				
+
 				System.out.println("");
 				System.out.print("Would you like to continue? Yes or No (y/n) to Continue.");
 				response = scan.nextLine().charAt(0);
 
-			} 
-			
-			
-			
+			}
+
 			yesAnswer = (response == 'Y') || (response == 'y');
 			noAnswer = (response == 'N') || (response == 'n');
-
 
 			// Breaks Line after while Loop
 			System.out.println("");
@@ -143,29 +135,41 @@ public class BookTest {
 		System.out.println(
 				"----------------------------------------------------------------------------------------------------");
 
+		// Prints list of Books and information
 		for (Book b : myList) {
 
-		System.out.println(b);
+			System.out.println(b);
 
 		}
 
-		
-	
+		// Prints Copies sold this week
+		System.out.println("");
 		System.out.println("Copies Sold This Week:");
 		System.out.println("-------------------------------------");
 
 		int copyCount;
-		for (int i = 0; i < myList.size(); i ++)
-			
-		{	
-			
-			Book b = new Book(serialNumber, pageNumber, copies, bookTitle, authorName, bookCost);
-			String booksTitle = b.getTitle();
-			System.out.print("Enter the number of copies sold for " + booksTitle.substring(i)  + ":");
+		for (Book b : myList)
+
+		{
+
+			String retrieveTitle = b.toStringTitle();
+
+			System.out.print("Enter the number of copies sold for " + retrieveTitle + ": ");
 			copyCount = scan.nextInt();
 		}
-		 
 
+		
+		System.out.println("");
+		System.out.println("");
+		System.out.println("Current Catalog");
+		System.out.println(
+				"----------------------------------------------------------------------------------------------------");
+		System.out.format("%-18s%-18s%-18s%-18s%-18s%-18s%n", "ISBN", "Title", "Author", "Pages", "Price", "In Stock");
+		System.out.println(
+				"----------------------------------------------------------------------------------------------------");
+
+		
+		
 	}
 
 }
