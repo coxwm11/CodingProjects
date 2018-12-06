@@ -1,3 +1,4 @@
+
 //Name: Book.java
 //Purpose: Implementation of a book class
 //Author: Wendy Prayer
@@ -70,6 +71,10 @@ public class Book implements Comparable<Book> {
 		
 	} 
 	
+	public String toStringTitle()
+	{
+		return (title);
+	}
 	
 	//Sorts books by price
 	public int compareTo(Book b) {
