@@ -147,7 +147,7 @@ public class BookTest {
 		System.out.println("Copies Sold This Week:");
 		System.out.println("-------------------------------------");
 
-		int copyCount;
+		int copyCount = 0;
 		for (Book b : myList)
 
 		{
@@ -158,7 +158,15 @@ public class BookTest {
 			copyCount = scan.nextInt();
 		}
 
+		//Calculates number remaining in stock of the books
 		
+		Book b = new Book(serialNumber, pageNumber, copies, bookTitle, authorName, bookCost);
+		int numInStock = b.getInStock();
+		int reduceStock = numInStock - copyCount;
+		copies = reduceStock;
+		
+		
+		//Prints out current catalog after subtractions of copies available
 		System.out.println("");
 		System.out.println("");
 		System.out.println("Current Catalog");
@@ -168,6 +176,16 @@ public class BookTest {
 		System.out.println(
 				"----------------------------------------------------------------------------------------------------");
 
+		//Book b2 = new Book(serialNumber, pageNumber, copies, bookTitle, authorName, bookCost);
+		for (  Book b2 : myList)
+
+		{
+			
+			
+			System.out.format("%-18s%-18s%-18s%-18s%-18s%-18s%n", b.getSerialNumber(), b.getTitle(), b.getAuthor(), b.getPages(), b.getPrice(), copies);
+			
+		}
+		
 		
 		
 	}
