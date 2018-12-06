@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 public class BookTest {
 
@@ -65,18 +66,20 @@ public class BookTest {
 		double bookCost = 0;
 		String bookTitle = null;
 		String authorName = null;
-		String cancelProgram = null;
-		boolean cancel = true;
+		boolean yesAnswer;
+		boolean noAnswer;
+		char response = 'Y';
+		
 		
 		do {
 			
-
+			
 			// User enters ISBN
-			System.out.print("Enter an ISBN :");
+			System.out.print("Enter an ISBN: ");
 			serialNumber = scan.nextLine();
 			
 			boolean stopPgm = serialNumber.equals("000");
-
+			
 			if (stopPgm != true)
 
 			{
@@ -109,15 +112,21 @@ public class BookTest {
 					
 
 				} while (copies == -1);
+					 
 				
 				
-				System.out.print("Would you like to continue? 000 to Quit. Yes (y) to Continue.");
 				
-				cancelProgram = scan.nextLine();
-				 
-				
+				System.out.println("");
+				System.out.print("Would you like to continue? Yes or No (y/n) to Continue.");
+				response = scan.nextLine().charAt(0);
 
 			} 
+			
+			
+			
+			yesAnswer = (response == 'Y') || (response == 'y');
+			noAnswer = (response == 'N') || (response == 'n');
+
 
 			// Breaks Line after while Loop
 			System.out.println("");
@@ -126,7 +135,7 @@ public class BookTest {
 
 			myList.add(b);
 
-		} while (cancel != true);
+		} while (yesAnswer || !(noAnswer));
 
 		System.out.println(
 				"----------------------------------------------------------------------------------------------------");
@@ -141,17 +150,21 @@ public class BookTest {
 		}
 
 		
-		
-
+	
 		System.out.println("Copies Sold This Week:");
 		System.out.println("-------------------------------------");
 
-		/*
-		 * for (Book b : myList); {
-		 * System.out.print("Enter the number of copies sold for " + bookTitle + ":");
-		 * int copyCount = scan.nextInt(); }
-		 * 
-		 */
+		int copyCount;
+		for (int i = 0; i < myList.size(); i ++)
+			
+		{	
+			
+			Book b = new Book(serialNumber, pageNumber, copies, bookTitle, authorName, bookCost);
+			String booksTitle = b.getTitle();
+			System.out.print("Enter the number of copies sold for " + booksTitle.substring(i)  + ":");
+			copyCount = scan.nextInt();
+		}
+		 
 
 	}
 
