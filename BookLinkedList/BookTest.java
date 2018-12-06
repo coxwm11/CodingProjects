@@ -66,10 +66,10 @@ public class BookTest {
 		String bookTitle = null;
 		String authorName = null;
 		String cancelProgram = null;
-		//boolean cancel = null;
+		boolean cancel = true;
 		
-
 		do {
+			
 
 			// User enters ISBN
 			System.out.print("Enter an ISBN :");
@@ -113,7 +113,7 @@ public class BookTest {
 				
 				System.out.print("Would you like to continue? 000 to Quit. Yes (y) to Continue.");
 				
-				 cancelProgram = scan.nextLine();
+				cancelProgram = scan.nextLine();
 				 
 				
 
@@ -126,7 +126,7 @@ public class BookTest {
 
 			myList.add(b);
 
-		} while (cancelProgram.equals("000") != true);
+		} while (cancel != true);
 
 		System.out.println(
 				"----------------------------------------------------------------------------------------------------");
