@@ -1,11 +1,10 @@
 package book;
 
-import java.lang.reflect.Array;
+
 import java.util.InputMismatchException;
-import java.util.Iterator;
 import java.util.Scanner;
 import java.util.LinkedList;
-import java.util.ListIterator;
+
 
 public class BookTest {
 
@@ -176,13 +175,15 @@ public class BookTest {
 		System.out.println(
 				"----------------------------------------------------------------------------------------------------");
 
-		//Book b2 = new Book(serialNumber, pageNumber, copies, bookTitle, authorName, bookCost);
-		for (  Book b2 : myList)
+		
+		//I need help here!!!!!!
+		Book b3 = new Book(serialNumber, pageNumber, copies, bookTitle, authorName, bookCost);
+		for (   Book b2 : myList)
 
 		{
 			
 			
-			System.out.format("%-18s%-18s%-18s%-18s%-18s%-18s%n", b.getSerialNumber(), b.getTitle(), b.getAuthor(), b.getPages(), b.getPrice(), copies);
+			System.out.println(b3);
 			
 		}
 		
