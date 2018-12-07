@@ -1,4 +1,4 @@
-//Name: Book.java
+//Name: BookTest.java
 //Purpose: Implementation of a book class
 //Author: Wendy Prayer
 //Date:12/4/2018
