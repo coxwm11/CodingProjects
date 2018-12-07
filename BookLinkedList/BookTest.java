@@ -1,3 +1,9 @@
+//Name: Book.java
+//Purpose: Implementation of a book class
+//Author: Wendy Prayer
+//Date:12/4/2018
+
+
 package book;
 
 
@@ -147,6 +153,9 @@ public class BookTest {
 		System.out.println("-------------------------------------");
 
 		int copyCount = 0;
+		int totalCount = 0;
+		double totalSold = 0;
+		
 		for (Book b : myList)
 
 		{
@@ -155,14 +164,21 @@ public class BookTest {
 
 			System.out.print("Enter the number of copies sold for " + retrieveTitle + ": ");
 			copyCount = scan.nextInt();
+			
+			totalCount += copyCount;
+			
+			totalSold += copyCount * b.price;
+			
+			int remainingStock = b.getInStock() - copyCount;
+			
+			b.setInStock(remainingStock);
+			
+			
+			
 		}
 
-		//Calculates number remaining in stock of the books
 		
-		Book b = new Book(serialNumber, pageNumber, copies, bookTitle, authorName, bookCost);
-		int numInStock = b.getInStock();
-		int reduceStock = numInStock - copyCount;
-		copies = reduceStock;
+	
 		
 		
 		//Prints out current catalog after subtractions of copies available
@@ -177,17 +193,19 @@ public class BookTest {
 
 		
 		//I need help here!!!!!!
-		Book b3 = new Book(serialNumber, pageNumber, copies, bookTitle, authorName, bookCost);
-		for (   Book b2 : myList)
+
+		for (   Book b : myList)
 
 		{
 			
 			
-			System.out.println(b3);
+			System.out.print(b);
 			
 		}
 		
-		
+		System.out.println("" );
+		System.out.println("Total number of books sold this week: " + totalCount );
+		System.out.println("Gross sales this week: $" + totalSold );
 		
 	}
 
