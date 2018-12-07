@@ -62,14 +62,20 @@ public class Book implements Comparable<Book> {
 
 	}
 	
+	public void setInStock(int setNumInStock)
+	{
+		this.inStock = setNumInStock;
+	}
 	
-	//This prints out the list Come back and format this later
+	//This prints out the list 
 	public String toString(){
 		
 		
 		return String.format("%-18s%-18s%-18s%-18d%-18.2f%-18d%n", serialNumber , title ,author, pages, price ,inStock);
 		
 	} 
+	
+	
 	
 	public String toStringTitle()
 	{
