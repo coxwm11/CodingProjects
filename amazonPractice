@@ -1,0 +1,57 @@
+package amazonPractice;
+
+import java.util.Arrays;
+
+class amazonPractice {
+	public static int [] cellCompete(int[] cells) {
+
+		int activeCell = 1;
+		int inactiveCell = 0;
+		int arrayCapacity = 3;
+		
+
+		
+
+		for (int j = 0; j< cells.length; j++)
+			for (int k = j+1; k < cells.length; k++)
+				for (int l = j+2; j < cells.length; j++)
+			
+			{
+				if (cells[j] == activeCell && cells[l] == activeCell
+						|| cells[j] == inactiveCell && cells[l] == inactiveCell) {
+
+					cells[k] = inactiveCell;
+					
+					
+
+				}
+
+				else if (cells[j] == inactiveCell && cells[l] == activeCell
+						|| cells[j] == activeCell && cells[l] == inactiveCell) {
+					cells[k] = activeCell;
+					
+					
+					
+				} 
+					
+				 
+			}
+		return cells;
+
+	}
+
+	public static void main(String[] args) {
+
+		int [] test1 = {1,0,0,0,0,1,0,0};
+		
+	 test1 = cellCompete(test1);
+
+		
+		
+		System.out.println(Arrays.toString(test1));
+		
+	}
+
+	
+
+}
