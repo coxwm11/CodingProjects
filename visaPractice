@@ -1,0 +1,65 @@
+package visaPractice;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class VisaPractice {
+
+public static List<String> fizzBuzz(int n) {
+	
+List<String> ans = new ArrayList<String>(); 
+
+     
+        for (int num = 1; num <= n; num++)
+        {
+        	
+			boolean div3 = (num  % 3 == 0);
+        	boolean div5 = (num % 5 == 0);
+        	
+        	if (div3 && div5) {
+        		ans.add("FizzBuzz");
+        	}
+        	
+        	else if (div3) {
+        		ans.add ("Fizz");
+        	}
+        	
+        	
+        	else if (div5) {
+        		
+        	ans.add ("Buzz");	
+        	}
+        	
+        	else {
+        		
+        	ans.add	(Integer.toString(num));
+        		
+        		
+        	}
+        	
+        	}
+        	
+        return ans;
+        }
+
+	public static void main(String[] args) {
+		
+		List<String> numbersGalore = new ArrayList<String> ();
+		
+		Scanner scan = new Scanner (System.in);
+		
+		System.out.print("Please input a number: ");
+		
+		int number = scan.nextInt();
+		
+		numbersGalore = fizzBuzz(number);
+	
+		System.out.print(numbersGalore);
+		
+		
+		
+
+	}
+
+}
