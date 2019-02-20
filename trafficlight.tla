@@ -21,7 +21,11 @@ EXTENDS Integers, TLC
         ValidColors == (\A l \in {0,1}: lights[l] \in colors)
         Safe == (lights[0]="red" \/ lights[1]="red" )
         
-        EventuallyGreen == [](<>(lights[0] = "green")) /\ [](<>(lights[1] = "green"))
+        EventuallyGreen == [](<>(lights[0] = "green")) \/ [](<>(lights[1] = "green"))
+        EventuallyRed == [](<>(lights[0] = "red")) \/ [](<>(lights[1] = "red"))
+        
+        
+        
         
     end define;
     
@@ -59,7 +63,8 @@ VARIABLES colors, lights, next, pc
 ValidColors == (\A l \in {0,1}: lights[l] \in colors)
 Safe == (lights[0]="red" \/ lights[1]="red" )
 
-EventuallyGreen == [](<>(lights[0] = "green")) /\ [](<>(lights[1] = "green"))
+EventuallyGreen == [](<>(lights[0] = "green")) \/ [](<>(lights[1] = "green"))
+EventuallyRed == [](<>(lights[0] = "red")) \/ [](<>(lights[1] = "red"))
 
 
 vars == << colors, lights, next, pc >>
