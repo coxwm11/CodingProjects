@@ -19,6 +19,11 @@ EXTENDS Integers, TLC
        color.  You can check this using the model checker. *)
     define
         ValidColors == (\A l \in {0,1}: lights[l] \in colors)
+        Safe == (lights[0]="red" \/ lights[1]="red" )
+        EventuallyGreen == [](<>(lights[0] = "green")) /\ [](<>(lights[1] = "green"))
+        EventuallyYellow == [](<>(lights[0] = "yellow")) /\ [](<>(lights[1] = "yellow"))
+        EventuallyRed == [](<>(lights[0] = "red")) /\ [](<>(lights[1] = "red"))
+        LightOrder == 
     end define;
     
     (* This block defines the code for each light.  Both run the same code,
@@ -38,7 +43,7 @@ EXTENDS Integers, TLC
                 elsif (lights[self] = "yellow") then
         y2:         lights[self] := "red";
         y3:         next := self;
-                elsif ((lights[self] = "red") /\ (next = self)) then
+                elsif ((lights[self] = "red") /\ (next /= self)) then
         r2:         lights[self] := "green";
                 end if;
         rpt:    skip;
@@ -46,6 +51,80 @@ EXTENDS Integers, TLC
     end process;
 
 end algorithm;*)
+\* BEGIN TRANSLATION
+VARIABLES colors, lights, next, pc
+
+(* define statement *)
+ValidColors == (\A l \in {0,1}: lights[l] \in colors)
+Safe == (lights[0]="red" \/ lights[1]="red" )
+EventuallyGreen == [](<>(lights[0] = "green")) /\ [](<>(lights[1] = "green"))
+EventuallyYellow == [](<>(lights[0] = "yellow")) /\ [](<>(lights[1] = "yellow"))
+EventuallyRed == [](<>(lights[0] = "red")) /\ [](<>(lights[1] = "red"))
+LightOrder == (lights = "green") ~> (lights = "yellow") ~> (lights = "red")
+
+
+vars == << colors, lights, next, pc >>
+
+ProcSet == ({0,1})
+
+Init == (* Global variables *)
+        /\ colors = {"red", "green", "yellow"}
+        /\ lights = [ l \in {0,1} |-> IF l=0 THEN "green" ELSE "red"]
+        /\ next = 1
+        /\ pc = [self \in ProcSet |-> "a1"]
+
+a1(self) == /\ pc[self] = "a1"
+            /\ pc' = [pc EXCEPT ![self] = "g1"]
+            /\ UNCHANGED << colors, lights, next >>
+
+g1(self) == /\ pc[self] = "g1"
+            /\ IF (lights[self] = "green")
+                  THEN /\ pc' = [pc EXCEPT ![self] = "g2"]
+                  ELSE /\ IF (lights[self] = "yellow")
+                             THEN /\ pc' = [pc EXCEPT ![self] = "y2"]
+                             ELSE /\ IF ((lights[self] = "red") /\ (next /= self))
+                                        THEN /\ pc' = [pc EXCEPT ![self] = "r2"]
+                                        ELSE /\ pc' = [pc EXCEPT ![self] = "rpt"]
+            /\ UNCHANGED << colors, lights, next >>
+
+g2(self) == /\ pc[self] = "g2"
+            /\ lights' = [lights EXCEPT ![self] = "yellow"]
+            /\ pc' = [pc EXCEPT ![self] = "rpt"]
+            /\ UNCHANGED << colors, next >>
+
+y2(self) == /\ pc[self] = "y2"
+            /\ lights' = [lights EXCEPT ![self] = "red"]
+            /\ pc' = [pc EXCEPT ![self] = "y3"]
+            /\ UNCHANGED << colors, next >>
+
+y3(self) == /\ pc[self] = "y3"
+            /\ next' = self
+            /\ pc' = [pc EXCEPT ![self] = "rpt"]
+            /\ UNCHANGED << colors, lights >>
+
+r2(self) == /\ pc[self] = "r2"
+            /\ lights' = [lights EXCEPT ![self] = "green"]
+            /\ pc' = [pc EXCEPT ![self] = "rpt"]
+            /\ UNCHANGED << colors, next >>
+
+rpt(self) == /\ pc[self] = "rpt"
+             /\ TRUE
+             /\ pc' = [pc EXCEPT ![self] = "a1"]
+             /\ UNCHANGED << colors, lights, next >>
+
+proc(self) == a1(self) \/ g1(self) \/ g2(self) \/ y2(self) \/ y3(self)
+                 \/ r2(self) \/ rpt(self)
+
+Next == (\E self \in {0,1}: proc(self))
+           \/ (* Disjunct to prevent deadlock on termination *)
+              ((\A self \in ProcSet: pc[self] = "Done") /\ UNCHANGED vars)
+
+Spec == /\ Init /\ [][Next]_vars
+        /\ \A self \in {0,1} : SF_vars(proc(self))
+
+Termination == <>(\A self \in ProcSet: pc[self] = "Done")
+
+\* END TRANSLATION
 
 
 =============================================================================
