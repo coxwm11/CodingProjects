@@ -23,7 +23,9 @@ EXTENDS Integers, TLC
         EventuallyGreen == [](<>(lights[0] = "green")) /\ [](<>(lights[1] = "green"))
         EventuallyYellow == [](<>(lights[0] = "yellow")) /\ [](<>(lights[1] = "yellow"))
         EventuallyRed == [](<>(lights[0] = "red")) /\ [](<>(lights[1] = "red"))
-        LightOrder == 
+       LightOrder == ([](<>(lights[0]= "green"))) ~> ([](<>(lights[0]= "yellow"))) ~> ([](<>(lights[0]= "red"))) /\ ([](<>(lights[1]= "green"))) ~> ([](<>(lights[1]= "yellow"))) ~> ([](<>(lights[1]= "red")))
+
+
     end define;
     
     (* This block defines the code for each light.  Both run the same code,
@@ -55,12 +57,12 @@ end algorithm;*)
 VARIABLES colors, lights, next, pc
 
 (* define statement *)
-ValidColors == (\A l \in {0,1}: lights[l] \in colors)
-Safe == (lights[0]="red" \/ lights[1]="red" )
-EventuallyGreen == [](<>(lights[0] = "green")) /\ [](<>(lights[1] = "green"))
-EventuallyYellow == [](<>(lights[0] = "yellow")) /\ [](<>(lights[1] = "yellow"))
-EventuallyRed == [](<>(lights[0] = "red")) /\ [](<>(lights[1] = "red"))
-LightOrder == (lights = "green") ~> (lights = "yellow") ~> (lights = "red")
+ ValidColors == (\A l \in {0,1}: lights[l] \in colors)
+ Safe == (lights[0]="red" \/ lights[1]="red" )
+ EventuallyGreen == [](<>(lights[0] = "green")) /\ [](<>(lights[1] = "green"))
+ EventuallyYellow == [](<>(lights[0] = "yellow")) /\ [](<>(lights[1] = "yellow"))
+ EventuallyRed == [](<>(lights[0] = "red")) /\ [](<>(lights[1] = "red"))
+LightOrder == ([](<>(lights[0]= "green"))) ~> ([](<>(lights[0]= "yellow"))) ~> ([](<>(lights[0]= "red"))) /\ ([](<>(lights[1]= "green"))) ~> ([](<>(lights[1]= "yellow"))) ~> ([](<>(lights[1]= "red")))
 
 
 vars == << colors, lights, next, pc >>
