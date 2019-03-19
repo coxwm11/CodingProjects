@@ -1,0 +1,13 @@
+README:
+
+INSTRUCTIONS:
+To use this program you can type 'python simulator.py' on the command line. It will ask you "how many rows would you like to compute. Input the number and press enter. After, it will request if you would like to enter your y-values. Enter 'y' and press enter. At this time, you can enter 6 values, but you can not leave any inputs blank. For all empty y-values, enter 0. After entering the 6th y-value the Babbage simulator will begin. 
+
+
+APPROACH:
+For this program, I, initially, tried to loop through the inputs automatically. However, after each successive loop the list would be shortened by 1 value, because the last value could not look to the right; yet, it still had to be present in the succeeding line. For this reason. I decided to make each value have its on individual variable. Such that, after the calculations, the last value would still remain. After figuring out that this method was successful, I then wrote a function that retrieved that input and updated the list to make calculations on the last printed line. The calculations continue for as many lines as the user inputs for their value of x.
+
+
+TESTING:
+To make sure that the program ran accurately for all inputs, I tested the simulator using the derivatives provided in the homework and tested various values of x. For example, I tested the ranges from 0 - 20 and 0 - 100. I also tested if no values were entered, meaning all y-values were 0. In addition, I tested the simulator using multiple negative y-inputs and empty y-inputs. All tests worked as expected. 
+
