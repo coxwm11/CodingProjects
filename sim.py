@@ -47,23 +47,45 @@ def rowHeading():
 
 
 
-def calRow1(y):
+#def calRow1(y):
 #Goes through and adds first y-inputs to produce row 2    
     
-    rowOne = list()
-    i = 0
-    j = 1
-    k = len(rowOne)
-    while i < len(y):
-	while j < len (y):
-		lineOne= y[i] + y[j]
+#    rowOne = list()
+#    i = 0
+#    j = 1
+#    k = len(rowOne)
+#    while i < len(y):
+#	while j < len (y):
+#		lineOne= y[i] + y[j]
+#
+#        	i += 1
+#		j += 1
+#        	rowOne.append(int(lineOne))
+#	
+#    	return rowOne
 
-        	i += 1
-		j +=1
-        	rowOne.append(int(lineOne))
-	
-    	return rowOne
+
+def calRow1(y):
+    rowOne = list()
+    firstNum = y[0] + y[1]
+    rowOne.append(int(firstNum))
+
+    secNum = y[1] + y[2]
+    rowOne.append(int(secNum))
+
+    thirdNum = y[2] + y[3]
+    rowOne.append(int(thirdNum))
+
+    fourthNum = y[3] + y[4]
+    rowOne.append(int(fourthNum))
     
+    fifthNum = y[4] + y[5]
+    rowOne.append(int(fifthNum))
+
+    sixNum = y[5]
+    rowOne.append(int(sixNum))
+
+    return rowOne
 
 
 def nextLine(rowNumber, y):
@@ -72,7 +94,7 @@ def nextLine(rowNumber, y):
     x = 0
     while x < rowNumber:
         nextLine = calRow1(y)
-        print nextLine
+        print (x+1, nextLine) 
         x += 1
         y = nextLine
     
@@ -90,7 +112,7 @@ def main():
     rowHeading()
 
 #Prints list of y-input values
-    print y_list
+    print (0,y_list)
 
 #Calls function to calculate y-values and prints list
     nextLine(rowNumber, y_list)
