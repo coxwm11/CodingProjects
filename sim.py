@@ -38,31 +38,7 @@ def yInput():
 
 
 
-def rowHeading():
-#Formats heading of table
-    rowHeading = ("x","y", "y1", "y2","y3","y4","y5")
-    format_string = "%s %s %s %s %s %s %s"
-    print(format_string % rowHeading)
-    print("_____________________________________________________")
 
-
-
-#def calRow1(y):
-#Goes through and adds first y-inputs to produce row 2    
-    
-#    rowOne = list()
-#    i = 0
-#    j = 1
-#    k = len(rowOne)
-#    while i < len(y):
-#	while j < len (y):
-#		lineOne= y[i] + y[j]
-#
-#        	i += 1
-#		j += 1
-#        	rowOne.append(int(lineOne))
-#	
-#    	return rowOne
 
 
 def calRow1(y):
@@ -107,9 +83,6 @@ def main():
 
 #Calls the function to input 5 y-values
     y_list = yInput()
-
-#Creates a heading for table  
-    rowHeading()
 
 #Prints list of y-input values
     print (0,y_list)
