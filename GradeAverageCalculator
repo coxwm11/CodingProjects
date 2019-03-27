@@ -1,0 +1,61 @@
+package udemyPackage;
+
+import java.util.*;
+
+public class Grades {
+
+	public static void main(String[] args) {
+
+		double grade;
+
+		double counter = 0;
+
+		double average;
+
+		String response = null;
+
+		Scanner scan = new Scanner(System.in);
+
+		System.out.println("Do you want to enter grades? Enter (y) or (n):");
+
+		response = scan.nextLine();
+
+		while (response.charAt(0) == 'y' || response.charAt(0) == 'n') {
+
+			if (response.equals("y")) {
+
+				System.out.println("Pease enter Grades:");
+
+				for (int i = 0; i < 6; i++) {
+
+					grade = scan.nextInt();
+
+					counter += grade;
+					
+					
+
+				}
+
+				average = counter / 6;
+
+				System.out.println("Total Average: " + average);
+
+			}
+
+			else {
+
+		
+
+				System.out.print("Thank you for using the Grade Calculator!");
+			}
+
+			System.out.println("Do you want to enter grades? y or n");
+
+			String buffer = scan.nextLine();
+			response = scan.nextLine();
+
+		}
+
+	}
+
+}
