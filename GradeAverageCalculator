@@ -20,7 +20,7 @@ public class Grades {
 
 		response = scan.nextLine();
 
-		while (response.charAt(0) == 'y' || response.charAt(0) == 'n') {
+		while (response.charAt(0) == 'y' || response.charAt(0)== 'n' ) {
 
 			if (response.equals("y")) {
 
@@ -39,6 +39,13 @@ public class Grades {
 				average = counter / 6;
 
 				System.out.println("Total Average: " + average);
+				
+				counter = 0;
+				
+				System.out.println("Do you want to enter grades? y or n");
+
+				String buffer = scan.nextLine();
+				response = scan.nextLine();
 
 			}
 
@@ -46,13 +53,11 @@ public class Grades {
 
 		
 
-				System.out.print("Thank you for using the Grade Calculator!");
+				System.out.println("Thank you for using the Grade Calculator!");
+				break;
 			}
 
-			System.out.println("Do you want to enter grades? y or n");
-
-			String buffer = scan.nextLine();
-			response = scan.nextLine();
+			
 
 		}
 
