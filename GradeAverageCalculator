@@ -13,6 +13,8 @@ public class Grades {
 		double average;
 
 		String response = null;
+		
+		String rank = null;
 
 		Scanner scan = new Scanner(System.in);
 
@@ -35,16 +37,51 @@ public class Grades {
 					
 
 				}
+				
 
 				average = counter / 6;
+				
+				System.out.println("Does student have any grade less than 93? Enter (y) or (n) ");
+				
+				String bufffer = scan.nextLine();
+				String answer = scan.nextLine();
+				
+				
+				//ADD if no student has N/U's or lower than 93
+				
+				if (average >= 93 && answer.charAt(0)== 'n'){
+					
+					rank = "Principal's List";
+					
+					
+					}
+				else if(average >= 93) {
+					
+					rank = "1st Honor Roll";
+					
+				}
+				
+				else if(average >= 85 && average <= 92.99) {
+					
+					rank = "2nd Honor Roll";
+					
+				}
+				
+				else if (average <= 84) {
+					
+					rank = "No Honor Roll";
+				}
+
 
 				System.out.println("Total Average: " + average);
+				System.out.println("Rank: " + rank);
 				
 				counter = 0;
 				
+				System.out.println();
 				System.out.println("Do you want to enter grades? y or n");
 
-				String buffer = scan.nextLine();
+				
 				response = scan.nextLine();
 
 			}
