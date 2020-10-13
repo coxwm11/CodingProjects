@@ -16,6 +16,14 @@ class Board():
     def getBoardMatrix(self):
         return self._boardMatrix
 
+    def printBoard(self):
+        print("-" * len(self._boardMatrix[0]))
+
+        for i in self._boardMatrix:
+            print("|" + i + "|")
+
+        print("-" * len(self._boardMatrix[0]))
+
     
 
 class Car():
@@ -77,16 +85,16 @@ class Car():
 
 # these next functions in board
 # print board
-def printBoard(boardMatrix):
-    
-    print("-" * len(boardMatrix[0]) )
-
-    for i in boardMatrix:
-
-        print ("|" + i + "|")
-
-     
-    print("-" * len(boardMatrix[0]) )
+# def printBoard(boardMatrix):
+#
+#     print("-" * len(boardMatrix[0]) )
+#
+#     for i in boardMatrix:
+#
+#         print ("|" + i + "|")
+#
+#
+#     print("-" * len(boardMatrix[0]) )
 
     
 
@@ -117,7 +125,7 @@ def main():
 
     #update inputString if one was provided
     if(argc == 3):
-        inputString = sys.argv[2]
+       inputString = sys.argv[2]
 
     #list of cars  
     list_car_chars = []
@@ -171,12 +179,12 @@ def main():
 
     #make decision based on command
     if (command == "print"):
-        print(board.getBoardMatrix())
-    
+        #print(board.getBoardMatrix())
+        board.printBoard()
 
     print(cars[0].getPositions())
-    solutionState(boardMatrix)
-    printBoard(boardMatrix)
+    #solutionState(boardMatrix)
+    #printBoard(boardMatrix)
     
     #print(sys.argv)        
         
