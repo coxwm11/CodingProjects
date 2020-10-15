@@ -24,6 +24,23 @@ class Board():
 
         print("-" * len(self._boardMatrix[0]))
 
+    def getBoardLength(self):
+
+        boardLength = len(self._boardMatrix)
+        return boardLength
+
+    def isDone(self, positions):
+        retVal = False
+        boardXlength = self.getBoardLength()
+
+        for p in positions:
+            if p[1] == boardXlength - 1:
+                retVal = True
+
+        return retVal
+
+
+
     
 
 class Car():
@@ -83,6 +100,8 @@ class Car():
 
 
 
+
+
 # these next functions in board
 # print board
 # def printBoard(boardMatrix):
@@ -98,18 +117,7 @@ class Car():
 
     
 
-# solutionState
-def solutionState(boardMatrix):
-#Determines if car is at the exit
-    
-    if boardMatrix[2][4] and boardMatrix[2][5] == "x":
 
-        response= "True"
-        print(response)
-
-    else:
-        response = "False"
-        print(response)
     
 
 
@@ -117,15 +125,24 @@ def solutionState(boardMatrix):
 def main():
     
     #set default inputString
-    inputString = "  o aa|  o   |xxo   |ppp  q|     q|     q"    
+    inputString = "  o aa|  o   |xxo   |ppp  q|     q|     q"
 
     #count of arguments
     argc = len(sys.argv)
-    command = sys.argv[1]
+    command = 'print'
+
+
+    if(argc >= 2):
+        command = sys.argv[1]
+
+
+
 
     #update inputString if one was provided
-    if(argc == 3):
+    if(argc > 2):
        inputString = sys.argv[2]
+
+
 
     #list of cars  
     list_car_chars = []
@@ -182,7 +199,19 @@ def main():
         #print(board.getBoardMatrix())
         board.printBoard()
 
-    print(cars[0].getPositions())
+    print(cars[1].getPositions())
+
+    board.getBoardLength()
+
+    if command == 'done':
+        for c in cars:
+            if c.getCharacter() == 'x':
+                print(board.isDone(c.getPositions()))
+
+
+
+
+
     #solutionState(boardMatrix)
     #printBoard(boardMatrix)
     
